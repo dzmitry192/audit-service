@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class ClientActionController {
     private final ClientActionServiceImpl clientActionService;
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Page<ClientActionDto>> getClientActions(
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "actionType", required = false) @NotBlank AuditActionType actionType,
@@ -41,6 +43,7 @@ public class ClientActionController {
     }
 
     @GetMapping("/{actionId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ClientActionDto> getClientActionById(@PathVariable(name = "actionId") Long actionId) {
         log.info("Request for getting client action with id = {}", actionId);
         return ResponseEntity.ok().body(clientActionService.getClientActionById(actionId));
