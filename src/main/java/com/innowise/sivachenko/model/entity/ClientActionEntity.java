@@ -1,5 +1,7 @@
-package com.innowise.auditservice.model.entity;
+package com.innowise.sivachenko.model.entity;
 
+import com.innowise.sivachenko.kafka.avro.AuditServiceType;
+import com.innowise.sivachenko.kafka.avro.AuditActionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,19 +14,26 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "client-actions")
 @Entity
 public class ClientActionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @Email
+    @Column(name = "email")
     private String email;
     @NotBlank
-    private String actionType;
+    @Column(name = "actionType")
+    private AuditActionType actionType;
+    @NotBlank
+    @Column(name = "serviceType")
+    private AuditServiceType serviceType;
     @NotNull
+    @Column(name = "actionStatus")
     private Integer actionStatus;
     @NotNull
+    @Column(name = "actionTime")
     private Instant actionTime;
 }

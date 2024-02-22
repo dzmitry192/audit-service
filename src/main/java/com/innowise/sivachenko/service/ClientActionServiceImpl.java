@@ -1,8 +1,9 @@
-package com.innowise.auditservice.service;
+package com.innowise.sivachenko.service;
 
-import com.innowise.auditservice.model.dto.ClientActionDto;
-import com.innowise.auditservice.repository.ClientActionRepository;
-import com.innowise.auditservice.service.api.ClientActionService;
+import com.innowise.sivachenko.kafka.avro.AuditActionRequest;
+import com.innowise.sivachenko.model.dto.ClientActionDto;
+import com.innowise.sivachenko.repository.ClientActionRepository;
+import com.innowise.sivachenko.service.api.ClientActionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,10 @@ public class ClientActionServiceImpl implements ClientActionService {
     @Override
     public Page<ClientActionDto> getActions(Pageable pageable) {
         return null;
+    }
+
+    @Override
+    public void saveActionRequest(AuditActionRequest actionRequest) {
+
     }
 }
